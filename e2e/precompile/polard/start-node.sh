@@ -22,7 +22,7 @@
 KEYS[0]="dev0"
 KEYS[1]="dev1"
 KEYS[2]="dev2"
-CHAINID="polaris-2061"
+CHAINID="hana-alpha-1"
 MONIKER="localtestnet"
 # Remember to change to other types of keyring like 'file' in-case exposing to outside world,
 # otherwise your balance will be wiped quickly
@@ -63,14 +63,14 @@ done
 
 # echo "UPDATED FILE"
 
-# Change parameter token denominations to abera
-jq '.app_state["staking"]["params"]["bond_denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-jq '.app_state["crisis"]["constant_fee"]["denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-jq '.app_state["gov"]["params"]["min_deposit"][0]["denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS";
+# Change parameter token denominations to hana
+jq '.app_state["staking"]["params"]["bond_denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+jq '.app_state["crisis"]["constant_fee"]["denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+jq '.app_state["gov"]["params"]["min_deposit"][0]["denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS";
 jq '.app_state["gov"]["params"]["min_deposit"][0]["amount"]="1"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS";
-jq '.app_state["gov"]["params"]["expedited_min_deposit"][0]["denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS";
+jq '.app_state["gov"]["params"]["expedited_min_deposit"][0]["denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS";
 jq '.app_state["gov"]["params"]["expedited_min_deposit"][0]["amount"]="2"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS";
-jq '.app_state["mint"]["params"]["mint_denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+jq '.app_state["mint"]["params"]["mint_denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 jq '.consensus["params"]["block"]["max_gas"]="30000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 # Dump genesis
@@ -79,7 +79,7 @@ jq '.consensus["params"]["block"]["max_gas"]="30000000"' "$GENESIS" >"$TMP_GENES
 
 # Allocate genesis accounts (cosmos formatted addresses)
 for KEY in "${KEYS[@]}"; do
-    polard genesis add-genesis-account $KEY 100000000000000000000000000abera --keyring-backend $KEYRING --home "$HOMEDIR"
+    polard genesis add-genesis-account $KEY 100000000000000000000000000hana --keyring-backend $KEYRING --home "$HOMEDIR"
 done
 
 # alice cosmos1dgtgps0vxwt90hu6f3cceqypc5k664czp95ank
@@ -87,9 +87,9 @@ done
 # charlie cosmos14nqnr8l8y2se3uu47qtyqehdfccfgwdlmshdpp
 
 # Give alice, bob and charlie some bank tokens.
-polard genesis add-genesis-account cosmos1dgtgps0vxwt90hu6f3cceqypc5k664czp95ank 1000000000000000000abera,1000000000000000000asupply,1000000000000000000atoken,12345bAKT,1000000000000000000bATOM,24690bOSMO,1000000000000000000stake  --keyring-backend $KEYRING --home "$HOMEDIR"
-polard genesis add-genesis-account cosmos1h08vp7xt40nks7d0mlg47duyv54ewdxr0p0f44 100abera,100atoken,1000000000000000000stake --keyring-backend $KEYRING --home "$HOMEDIR"
-polard genesis add-genesis-account cosmos14nqnr8l8y2se3uu47qtyqehdfccfgwdlmshdpp 1000000000000000000abera --keyring-backend $KEYRING --home "$HOMEDIR"
+polard genesis add-genesis-account cosmos1dgtgps0vxwt90hu6f3cceqypc5k664czp95ank 1000000000000000000hana,1000000000000000000asupply,1000000000000000000atoken,12345bAKT,1000000000000000000bATOM,24690bOSMO,  --keyring-backend $KEYRING --home "$HOMEDIR"
+polard genesis add-genesis-account cosmos1h08vp7xt40nks7d0mlg47duyv54ewdxr0p0f44 100hana,100atoken, --keyring-backend $KEYRING --home "$HOMEDIR"
+polard genesis add-genesis-account cosmos14nqnr8l8y2se3uu47qtyqehdfccfgwdlmshdpp 1000000000000000000hana --keyring-backend $KEYRING --home "$HOMEDIR"
 
 # Give alice, bob and charlie some evm tokens.
 jq '.app_state["evm"]["alloc"]["6A1680c1Ec339657df9a4c718C8081C52daD5702"]["balance"]="0x4563918244f40000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
@@ -97,7 +97,7 @@ jq '.app_state["evm"]["alloc"]["bBcec0f8cBAbe76879AfdfD15F3784652B9734C3"]["bala
 jq '.app_state["evm"]["alloc"]["acc1319Fe722A198F395F0164066ED4E309439Bf"]["balance"]="0x4563918244f40000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 # Sign genesis transaction
-polard genesis gentx ${KEYS[0]} 1000000000000000000000abera --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"
+polard genesis gentx ${KEYS[0]} 1000000000000000000000hana --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"
 ## In case you want to create multiple validators at genesis
 ## 1. Back to `./build/bin/polard keys add` step, init more keys
 ## 2. Back to `./build/bin/polard add-genesis-account` step, add balance for those
@@ -129,4 +129,4 @@ sed -i 's/timeout_commit = "5s"/timeout_commit = "2s"/g' $CONFIG_TOML
 sed -i 's/timeout_broadcast_tx_commit = "10s"/timeout_broadcast_tx_commit = "2s"/g' $CONFIG_TOML
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)m
-polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001abera --home "$HOMEDIR"
+polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001hana --home "$HOMEDIR"

@@ -21,8 +21,8 @@
 
 # Constants
 KEYS[0]="dev0"
-CHAINID="polaris-2061"
-MONIKER="localtestnet"
+CHAINID="hana-alpha-1"
+MONIKER="alpha-testnet"
 KEYRING="test"
 KEYALGO="eth_secp256k1"
 LOGLEVEL="info"
@@ -55,20 +55,20 @@ updated_genesis=$(echo "$temp_genesis" | jq --argjson eth_gen "$ETH_GENESIS_SOUR
 echo "$updated_genesis" > "$GENESIS"
 
 
-# Change parameter token denominations to abera
-jq '.app_state["staking"]["params"]["bond_denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-jq '.app_state["crisis"]["constant_fee"]["denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
-jq '.app_state["mint"]["params"]["mint_denom"]="abera"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+# Change parameter token denominations to hana
+jq '.app_state["staking"]["params"]["bond_denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+jq '.app_state["crisis"]["constant_fee"]["denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+jq '.app_state["mint"]["params"]["mint_denom"]="hana"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 jq '.consensus["params"]["block"]["max_gas"]="30000000"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 # Allocate genesis accounts (cosmos formatted addresses)
 for KEY in "${KEYS[@]}"; do
-    polard genesis add-genesis-account $KEY 100000000000000000000000000abera --keyring-backend $KEYRING --home "$HOMEDIR"
+    polard genesis add-genesis-account $KEY 100000000000000000000000000hana --keyring-backend $KEYRING --home "$HOMEDIR"
 done
 
 # Sign genesis transaction
-polard genesis gentx ${KEYS[0]} 1000000000000000000000abera --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"
+polard genesis gentx ${KEYS[0]} 1000000000000000000000hana --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"
 
 # Collect genesis tx
 polard genesis collect-gentxs --home "$HOMEDIR"
@@ -135,4 +135,4 @@ sed -i 's/timeout_commit = "5s"/timeout_commit = "2s"/g' $CONFIG_TOML
 sed -i 's/timeout_broadcast_tx_commit = "10s"/timeout_broadcast_tx_commit = "2s"/g' $CONFIG_TOML
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)m
-polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001abera --home "$HOMEDIR"
+polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001hana --home "$HOMEDIR"
