@@ -50,9 +50,8 @@ var DefaultGenesis = &core.Genesis{
 
 	// Genesis Accounts
 	Alloc: core.GenesisAlloc{
-		// 0xfffdbb37105441e14b0ee6330d855d8504ff39e705c3afa8f859ac9865f99306
-		common.HexToAddress("0x20f33CE90A13a4b5E7697E3544c3083B8F8A51D4"): {
-			Balance: big.NewInt(0).Mul(big.NewInt(5e18), big.NewInt(100)), //nolint:gomnd // its okay.
+		common.HexToAddress("0x92CB23E5E1C3b2b9CAda7f9240A644954C2585D4"): {
+			Balance: big.NewInt(0).Mul(big.NewInt(1e18), big.NewInt(100000000)), //nolint:gomnd // its okay.
 		},
 	},
 
