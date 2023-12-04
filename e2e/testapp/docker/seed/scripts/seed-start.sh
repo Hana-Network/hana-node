@@ -25,4 +25,4 @@ if [ -z "$LOGLEVEL" ]; then
     LOGLEVEL="info"
 fi
 
-polard start --log_level $LOGLEVEL --minimum-gas-prices=0.0001abera --api.enable --home "$HOMEDIR"
+polard start --log_level $LOGLEVEL --minimum-gas-prices=0.0001hana --api.enable --home "$HOMEDIR"

@@ -30,9 +30,9 @@ fi
 
 KEY="$1"
 
-polard genesis add-genesis-account $KEY 100000000000000000000000000abera,100000000000000000000000000stgusdc --keyring-backend $KEYRING --home "$HOMEDIR"
+polard genesis add-genesis-account $KEY 100000000000000000000000000hana,100000000000000000000000000stgusdc --keyring-backend $KEYRING --home "$HOMEDIR"
 
-polard genesis gentx $KEY 1000000000000000000000abera --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR" \
+polard genesis gentx $KEY 1000000000000000000000hana --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR" \
     --moniker="$KEY" \
     --identity="identity of $KEY" \
     --details="This is $KEY" \
