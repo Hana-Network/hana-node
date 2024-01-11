@@ -11,7 +11,7 @@
 # #
 # name: "codeql"
 
-# TEMPORARILY REMOVE UNTIL GO 1.21 IS SUPPORTED.
+# # TEMPORARILY REMOVE UNTIL GO 1.21 IS SUPPORTED.
 
 # on:
 #   push:
