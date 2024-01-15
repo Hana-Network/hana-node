@@ -53,6 +53,18 @@ var DefaultGenesis = &core.Genesis{
 		common.HexToAddress("0x92CB23E5E1C3b2b9CAda7f9240A644954C2585D4"): {
 			Balance: big.NewInt(0).Mul(big.NewInt(1e18), big.NewInt(100000000)), //nolint:gomnd // its okay.
 		},
+		common.HexToAddress("0x0e080348BE2792655725D95972Ca56803BcbEc53"): {
+			Balance: big.NewInt(0).Mul(big.NewInt(1e18), big.NewInt(100000000)), //nolint:gomnd // its okay.
+		},
+		common.HexToAddress("0xa4D5F73Cc27FB12f362a9cA39728066c4547158e"): {
+			Balance: big.NewInt(0).Mul(big.NewInt(1e18), big.NewInt(100000000)), //nolint:gomnd // its okay.
+		},
+		common.HexToAddress("0x32666a47470234222f89822b9dc33AFfB203f57b"): {
+			Balance: big.NewInt(0).Mul(big.NewInt(1e18), big.NewInt(100000000)), //nolint:gomnd // its okay.
+		},
+		common.HexToAddress("0xdac5A7851a60f16B307ab57814D6c6A8143f0eAE"): {
+			Balance: big.NewInt(0).Mul(big.NewInt(1e18), big.NewInt(100000000)), //nolint:gomnd // its okay.
+		},
 	},
 
 	// These fields are used for consensus tests. Please don't use them
