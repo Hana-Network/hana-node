@@ -6,7 +6,7 @@ require (
 	github.com/berachain/polaris/contracts v0.0.0-20231107182447-2b91ecc782a6
 	github.com/berachain/polaris/eth v0.0.0-20231107182447-2b91ecc782a6
 	github.com/docker/docker v24.0.7+incompatible
-	github.com/ethereum/go-ethereum v1.13.4
+	github.com/ethereum/go-ethereum v1.13.5
 	github.com/onsi/ginkgo/v2 v2.13.0
 	github.com/onsi/gomega v1.27.10
 	github.com/ory/dockertest v3.3.5+incompatible
@@ -55,15 +55,16 @@ require (
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
-	golang.org/x/crypto v0.14.0 // indirect
+	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/sync v0.5.0 // indirect
-	golang.org/x/sys v0.14.0 // indirect
-	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/tools v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools v2.2.0+incompatible // indirect
+	gotest.tools/v3 v3.5.1 // indirect
 	rsc.io/tmplfunc v0.0.3 // indirect
 )
