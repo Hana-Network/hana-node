@@ -34,7 +34,6 @@ Polaris is built with several core principles in mind:
 ## Documentation
 
 If you want to build on top of Polaris, take a look at our [documentation](http://polaris.berachain.dev/).
-If you want to help contribute to the framework, check out the [Framework Specs](./specs/).
 
 ## Directory Structure
 
